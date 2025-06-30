@@ -5,28 +5,10 @@
     <meta charset="UTF-8">
     <title>Tocar campainha</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
         video,
         canvas {
             width: 100%;
             max-width: 400px;
-            border-radius: 10px;
-        }
-
-        .card {
-            margin-top: 20px;
-            padding: 10px;
-            border: 2px solid #444;
-            border-radius: 10px;
-            max-width: 400px;
-        }
-
-        .photo {
-            width: 100%;
             border-radius: 10px;
         }
     </style>
@@ -36,20 +18,23 @@
 
     <h1>Tocar campainha</h1>
 
-    <video id="video" autoplay></video><br>
-    <button onclick="tirarFoto()">Tirar Foto</button><br><br>
-
-    <input type="text" id="nome" placeholder="Nome da pessoa" /><br><br>
-    <textarea id="mensagem" placeholder="Escreva uma mensagem"></textarea><br><br>
+    <!-- Foto -->
+    <video id="video" autoplay></video>
+    <!-- Tirar foto botao-->
+    <button onclick="tirarFoto()">Tirar Foto</button>
+    <!-- Nome da pessoa -->
+    <input type="text" id="nome" placeholder="Nome da pessoa" />
+    <!-- Mensagem -->
+    <textarea id="mensagem" placeholder="Escreva uma mensagem"></textarea>
+    <!-- Botao enviar, quando clicar vai mandar a mensagem com o telegram e para a residencia -->
     <button id="btnEnviar" onclick="enviarFormulario()">Enviar</button>
-
-
-    <canvas id="canvas" style="display: none;"></canvas>
-
+    <!-- permitir o uso da camera -->
+    <canvas id="canvas" style="display: none;"></canvas>    
+    <!-- card de chamada -->
     <div id="resultado"></div>
 
 
-
+    <!-- links -->
     <script src="../js/formulario.js"></script>
     <script src="../js/notify.js"></script>
 </body>
