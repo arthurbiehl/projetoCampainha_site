@@ -1,8 +1,9 @@
 async function enviarMensagem(nome, texto, imagemCapturada) {
     const token = "8171652772:AAEJnfGt4upP_dcQCbDvDsJl7jBcTAQ8224";
     const chatId = "-4989648744";
+    const site = " "
 
-    const mensagem = `🔔 Sua campainha esta tocando, veja quem é! 🚪 \n👤 Nome: ${nome} \n💬 Mensagem: ${texto}`;
+    const mensagem = `🔔 Sua campainha esta tocando, veja quem é! 🚪 \n👤 Nome: ${nome} \n💬 Mensagem: ${texto} \n Veja no Site: ${site}`;
 
     await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: "POST",
@@ -28,3 +29,17 @@ async function enviarMensagem(nome, texto, imagemCapturada) {
 
     limparFormulario()
 }
+
+function verificarResposta() {
+    const resposta = localStorage.getItem("respostaCampainha");
+    if (!resposta) return;
+
+    const { resposta: status, dataResposta } = JSON.parse(resposta);
+
+    if (Date.now() - dataResposta < 2 * 60 * 1000) {
+        alert(`Resposta da residência: ${status === 'aceito' ? 'VOCÊ FOI ACEITO' : 'CHAMADA IGNORADA'}`);
+        localStorage.removeItem("respostaCampainha");
+    }
+}
+
+setInterval(verificarResposta, 1000);

@@ -11,44 +11,36 @@ navigator.mediaDevices.getUserMedia({ video: true })
         alert('Erro ao acessar a câmera: ' + erro);
     });
 
-
-function limparFormulario() {
-    document.getElementById('nome').value = '';
-    document.getElementById('mensagem').value = '';
-    canvas.style.display = 'none';
-    imagemCapturada = '';
-}
-
 function tirarFoto() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     contexto.drawImage(video, 0, 0, canvas.width, canvas.height);
     imagemCapturada = canvas.toDataURL('image/png');
-    canvas.style.display = 'none';
     alert('Foto tirada com sucesso!');
 }
 
-async function enviarFormulario() {
+function enviarFormulario() {
     const nome = document.getElementById('nome').value;
     const mensagem = document.getElementById('mensagem').value;
 
     if (!imagemCapturada || !nome || !mensagem) {
-        alert('Por favor, preencha todos os campos.');
+        alert('Preencha todos os campos e tire a foto.');
         return;
     }
 
-    // Atualiza o card local
+    // Mostra visual da chamada
     const resultadoDiv = document.getElementById('resultado');
     resultadoDiv.innerHTML = `
         <div class="card">
-          <h1>Sua chamada!</h1>
-          <img src="${imagemCapturada}" class="photo" />
-          <h3>${nome}</h3>
-          <p>${mensagem}</p>
+            <h2>Sua chamada foi enviada!</h2>
+            <img src="${imagemCapturada}" class="photo" />
+            <h3>${nome}</h3>
+            <p>${mensagem}</p>
         </div>
     `;
+    document.getElementById("popup").classList.remove("hidden");
 
-    // 🔔 Armazena no localStorage
+    // Salva localmente (para residência)
     localStorage.setItem("campainha", JSON.stringify({
         nome,
         mensagem,
@@ -56,16 +48,11 @@ async function enviarFormulario() {
         data: Date.now()
     }));
 
-    // Envia para o Telegram
-    await enviarMensagem(nome, mensagem, imagemCapturada);
+    // Envia para Telegram
+    enviarMensagem(nome, mensagem, imagemCapturada);
 }
 
 
-localStorage.setItem("campainha", JSON.stringify({
-    nome,
-    mensagem,
-    imagem: imagemCapturada,
-    data: Date.now()
-}));
-
-
+function fecharPopup() {
+    document.getElementById("popup").classList.add("hidden");
+}
