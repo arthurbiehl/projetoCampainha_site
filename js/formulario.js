@@ -11,7 +11,6 @@ navigator.mediaDevices.getUserMedia({ video: true })
         alert('Erro ao acessar a câmera: ' + erro);
     });
 
-
 function limparFormulario() {
     document.getElementById('nome').value = '';
     document.getElementById('mensagem').value = '';
@@ -37,16 +36,18 @@ async function enviarFormulario() {
         return;
     }
 
-    // Atualiza o card local
+    // Atualiza o card local em forma de pop-up
+    const popup = document.getElementById('popup');
     const resultadoDiv = document.getElementById('resultado');
+
     resultadoDiv.innerHTML = `
-        <div class="card">
-          <h1>Sua chamada!</h1>
-          <img src="${imagemCapturada}" class="photo" />
-          <h3>${nome}</h3>
-          <p>${mensagem}</p>
-        </div>
+        <h1>Sua chamada!</h1>
+        <img src="${imagemCapturada}" />
+        <h3>${nome}</h3>
+        <p>${mensagem}</p>
     `;
+
+    popup.classList.remove('hidden');
 
     // 🔔 Armazena no localStorage
     localStorage.setItem("campainha", JSON.stringify({
@@ -60,6 +61,10 @@ async function enviarFormulario() {
     await enviarMensagem(nome, mensagem, imagemCapturada);
 }
 
+// fecha o pop-up
+function fecharPopup() {
+    document.getElementById('popup').classList.add('hidden');
+}
 
 localStorage.setItem("campainha", JSON.stringify({
     nome,
@@ -67,5 +72,3 @@ localStorage.setItem("campainha", JSON.stringify({
     imagem: imagemCapturada,
     data: Date.now()
 }));
-
-
