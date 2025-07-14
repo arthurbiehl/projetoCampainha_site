@@ -37,7 +37,7 @@ function verificarResposta() {
     const { resposta: status, dataResposta } = JSON.parse(resposta);
 
     if (Date.now() - dataResposta < 2 * 60 * 1000) {
-        alert(`Resposta da residência: ${status === 'aceito' ? 'VOCÊ FOI ACEITO' : 'CHAMADA IGNORADA'}`);
+        alert(`Resposta da residência: ${status === 'aceito' ? 'Já esta indo atender!' : 'CHAMADA IGNORADA'}`);
         localStorage.removeItem("respostaCampainha");
     }
 }
