@@ -1,7 +1,7 @@
 async function enviarMensagem(nome, texto, imagemCapturada) {
     const token = "8171652772:AAEJnfGt4upP_dcQCbDvDsJl7jBcTAQ8224";
     const chatId = "-4989648744";
-    const site = "https://arthurbiehl.github.io/projetoCampainha_site/pages/residencia"
+    const site = "https://projetocampainha-site.onrender.com/pages/residencia"
 
     const mensagem = `🔔 Sua campainha esta tocando, veja quem é! 🚪 \n👤 Nome: ${nome} \n💬 Mensagem: ${texto} \n Veja no Site: ${site}`;
 
